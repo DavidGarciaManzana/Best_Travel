@@ -13,17 +13,17 @@
 //Example
 //ls = [50, 55, 57, 58, 60]. /3
 // [50,55,57],[50,55,58],[50,55,60],[50,57,58],[50,57,60],[50,58,60],[55,57,58],[55,57,60],[55,58,60],[57,58,60]
-//162,163,165
+//162,           163,        165,      165,        167      168
 
 //ls = [x, y, z, a, b]
-// [x,y,z],[x,y,a],[x,y,b],
-// [x,z,a],[x,z,b],
-// [x,a,b],
+// [x,y,z],[x,y,a],[x,y,b],      [x,y] [z,a,b]
+// [x,z,a],[x,z,b],              [x,z] [a,b]
+// [x,a,b],                      [x,a] [b]
 
-// [y,z,a],[y,z,b],
-// [y,a,b],
+// [y,z,a],[y,z,b],              [y,z] [a,b]
+// [y,a,b]                       [y,a] [b]
 
-// [z,a,b]
+// [z,a,b]                        [z,a][b]
 
 
 //1.-Create a function that does what you have on each of the lines above and call it for every letter in the array 
@@ -36,12 +36,25 @@ let sumCombinations = (k: number, ls: number[]) => {
             //------------------------------------------------------------------------------------------------------
             if (index == 0) {
                 //saca un array de los primeros 2 digitos y sumalos 
-                let base = ls.slice(0, k - 1);
+                //ls = [x, y, z, a, b]
+                let base = ls.slice(index, k-1);
                 let rest = ls.slice(k - 1, ls.length)
                 console.log(base, rest)
-                for (let item of rest) {
-                    console.log(base.reduce((a, b) => a + b, 0) + item)
+
+                let line =(base:number[],rest:number[])=> {
+                    for (let item of rest) {
+                        console.log(base.reduce((a, b) => a + b, 0) + item)
+                    }
                 }
+                while(rest.length>=1){
+                    line(base,rest)
+                    base.pop(),base.push(rest[0]),rest.shift()
+                }
+                // line(base,rest)
+                // console.log(base.pop(),base.push(rest[0]),base)
+                // console.log(rest.shift())
+                // console.log(rest)
+                // line(base,rest)
                 // // obtener todas las sumas que empiecen con x
                 // // let firstComb = 0;
                 // for (let i=0;i<k-1;i++) {
@@ -49,7 +62,7 @@ let sumCombinations = (k: number, ls: number[]) => {
                 //     item += ls[i+1]
 
                 //  }
-                //  console.log(item)
+                //  console.log(item)}
 
             }
             // console.log(`item: ${item}, index: ${index}`)
