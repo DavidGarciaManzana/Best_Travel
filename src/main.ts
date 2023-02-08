@@ -31,21 +31,23 @@
 
 let sumCombinations = (k: number, ls: number[]) => {
     function myfunc(item: number, index: number) {
-        if (index == 0) {
-            console.log(`item: ${item}, index: ${index}`)
-            let firstComb = 0;
-
-            for (let i=0;i<k;i++) {
-                firstComb +=ls[i] 
+        //Make sure the function ends when the index get to the last digit who can make a combination with number k
+        if(index<ls.length-k+1) {
+            if (index == 0) {
                 
-             }
-             console.log(firstComb)
+                let firstComb = 0;
+                for (let i=0;i<k;i++) {
+                    // item += ls[i]
+                    firstComb = item + ls[i-1]
+                 }
+                 console.log(firstComb)
+            }
+            console.log(`item: ${item}, index: ${index}`)
         }
-
     }
     ls.forEach(myfunc);
 }
 sumCombinations(3, [50, 55, 57, 58, 60]) 
 
-
+// [50,55,57],[50,55,58],[50,55,60],
 //162,163,165
