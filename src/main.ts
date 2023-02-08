@@ -13,7 +13,7 @@
 //Example
 //ls = [50, 55, 57, 58, 60]. /3
 // [50,55,57],[50,55,58],[50,55,60],[50,57,58],[50,57,60],[50,58,60],[55,57,58],[55,57,60],[55,58,60],[57,58,60]
-//162,           163,        165,      165,        167      168
+//162,           163,        165,      165,        167      168     y    170        172        173   z   175
 
 //ls = [x, y, z, a, b]
 // [x,y,z],[x,y,a],[x,y,b],      [x,y] [z,a,b]
@@ -34,11 +34,12 @@ let sumCombinations = (k: number, ls: number[]) => {
         //Make sure the function ends when the index get to the last digit who can make a combination with number k
         if (index < ls.length - k + 1) {
             //------------------------------------------------------------------------------------------------------
-            if (index == 0) {
+            
                 //saca un array de los primeros 2 digitos y sumalos 
                 //ls = [x, y, z, a, b]
-                let base = ls.slice(index, k-1);
-                let rest = ls.slice(k - 1, ls.length)
+                //[50, 55, 57, 58, 60]
+                let base = ls.slice(index, index+k - 1);
+                let rest = ls.slice(index+k - 1, ls.length)
                 console.log(base, rest)
 
                 let line =(base:number[],rest:number[])=> {
@@ -64,7 +65,7 @@ let sumCombinations = (k: number, ls: number[]) => {
                 //  }
                 //  console.log(item)}
 
-            }
+            
             // console.log(`item: ${item}, index: ${index}`)
             //------------------------------------------------------------------------------------------------------
         }
