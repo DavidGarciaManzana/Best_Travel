@@ -32,22 +32,40 @@
 let sumCombinations = (k: number, ls: number[]) => {
     function myfunc(item: number, index: number) {
         //Make sure the function ends when the index get to the last digit who can make a combination with number k
-        if(index<ls.length-k+1) {
+        if (index < ls.length - k + 1) {
+            //------------------------------------------------------------------------------------------------------
             if (index == 0) {
-                
-                let firstComb = 0;
-                for (let i=0;i<k;i++) {
-                    // item += ls[i]
-                    firstComb = item + ls[i-1]
-                 }
-                 console.log(firstComb)
+                //saca un array de los primeros 2 digitos y sumalos 
+                let base = ls.slice(0, k - 1);
+                let rest = ls.slice(k - 1, ls.length)
+                console.log(base, rest)
+                for (let item of rest) {
+                    console.log(base.reduce((a, b) => a + b, 0) + item)
+                }
+                // // obtener todas las sumas que empiecen con x
+                // // let firstComb = 0;
+                // for (let i=0;i<k-1;i++) {
+                //     // item += ls[i]
+                //     item += ls[i+1]
+
+                //  }
+                //  console.log(item)
+
             }
-            console.log(`item: ${item}, index: ${index}`)
+            // console.log(`item: ${item}, index: ${index}`)
+            //------------------------------------------------------------------------------------------------------
         }
+        //llamar a mi funcion con un nuevo array (que sera sin el primer digito)
+        //newArray.forEach(myFunc)
+
+
     }
     ls.forEach(myfunc);
 }
-sumCombinations(3, [50, 55, 57, 58, 60]) 
+sumCombinations(3, [50, 55, 57, 58, 60])
 
 // [50,55,57],[50,55,58],[50,55,60],
 //162,163,165
+
+
+// **k debe ser menor o igual a ls (si es igual la respuesta es la suma de todos los elementos del array)
