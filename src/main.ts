@@ -48,27 +48,64 @@ let sumCombinations = (k: number, ls: number[]) => {
     ls.forEach(myfunc);
     return allSums;
 }
-
+//.sort(function (a,b) {return b - a})
+//.sort(function (a,b) {return a - b})
 let chooseBestSum = (t: number, k: number, ls: number[]): number | null => {
     // let i = 0;
-    for (let element of sumCombinations(k, ls).sort().reverse()) {
-        if (element <= t) {
-            // i=element
-            return element
+    if (ls.length == k) {
+        return ls.reduce((a, b) => a + b, 0) < t ? ls.reduce((a, b) => a + b, 0) : null
+    } else if (k==1) { 
+        for(let element of ls.sort(function (a,b) { return b - a })){
+            if(element <= t) {
+                // console.log(element)
+                return element
+            }
         }
+        return null;
     }
-    return null
+    else {
+        console.log(`${sumCombinations(k, ls).sort(function (a, b) { return a - b}).reverse()}`)
+        console.log('Numero de comb: '+sumCombinations(k, ls).length)
+        for (let element of sumCombinations(k, ls).sort(function (a, b) { return a - b }).reverse()) {
+            if (element <= t) {
+                // i=element
+                // console.log(element)
+                return element
+
+            }
+        }
+        
+        return null
+    }
+    
 }
-console.log(chooseBestSum(174, 3, [50, 55, 57, 58, 60]));
-console.log(chooseBestSum(163, 3, [50, 55, 56, 57, 58]));
-console.log(chooseBestSum(163, 3, [50]));
-console.log(chooseBestSum(230, 3, [91, 74, 73, 85, 73, 81, 87]));
-console.log(chooseBestSum(880, 8, [
-    100, 76, 56, 44, 89,
-    73, 68, 56, 64, 123,
-    2333, 144, 50, 132, 123,
-    34, 89
-]));
+// console.log(chooseBestSum(174, 3, [50, 55, 57, 58, 60]));
+// console.log(chooseBestSum(163, 3, [50, 55, 56, 57, 58]));
+// console.log(chooseBestSum(163, 3, [50]));
+// console.log(chooseBestSum(230, 3, [91, 74, 73, 85, 73, 81, 87]));
+// console.log(chooseBestSum(880, 8, [
+//     100, 76, 56, 44, 89,
+//     73, 68, 56, 64, 123,
+//     2333, 144, 50, 132, 123,
+//     34, 89
+// ]));
+// console.log(chooseBestSum(331, 1, [
+//     91, 74, 73, 85,
+//     73, 81, 87
+// ]));
+// console.log(chooseBestSum(430, 8,[
+//     100,  76, 56,  44,  89,
+//      73,  68, 56,  64, 123,
+//    2333, 144, 50, 132, 123,
+//      34,  89
+//  ]));
+console.log(chooseBestSum(880, 8,[
+    100,  76, 56,  44,  89,
+     73,  68, 56,  64, 123,
+   2333, 144, 50, 132, 123,
+     34,  89
+ ]));
+ []
 
 
 // ts = [50, 55, 56, 57, 58] choose_best_sum(163, 3, ts) -> 163
